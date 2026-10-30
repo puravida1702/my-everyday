@@ -1,0 +1,335 @@
+
+:root {
+  --cream: #f7f2e9;
+  --paper: #fffdf8;
+  --ink: #252729;
+  --muted: #858078;
+  --line: #ded8ce;
+  --sand: #e9e1d5;
+  --soft: #eee9df;
+  --accent: #777b78;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Arial, sans-serif;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+.app {
+  max-width: 600px;
+  min-height: 100vh;
+  margin: auto;
+  padding-bottom: 95px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 22px 12px;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.icon-button {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+}
+
+main {
+  padding: 12px 18px;
+}
+
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 4px 22px;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: 27px;
+  margin: 8px 0;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: 14px;
+}
+
+.sun-icon {
+  font-size: 38px;
+  color: #777b78;
+}
+
+.progress-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  box-shadow: 0 3px 12px #302c2410;
+}
+
+.progress-circle {
+  width: 112px;
+  height: 112px;
+  flex-shrink: 0;
+  border: 5px solid var(--sand);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.progress-circle strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 26px;
+}
+
+.progress-circle span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.progress-info h3 {
+  font-family: Georgia, serif;
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.progress-info p,
+.progress-info span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.section {
+  margin-top: 28px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 3px 13px;
+}
+
+.section-heading h2 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  margin: 0;
+}
+
+.section-heading button {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.small-note {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.task-list {
+  display: grid;
+  gap: 10px;
+}
+
+.task-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px #302c2408;
+}
+
+.task-card input {
+  width: 21px;
+  height: 21px;
+  accent-color: #555b58;
+  flex-shrink: 0;
+}
+
+.task-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-details strong {
+  display: block;
+  font-size: 14px;
+}
+
+.task-details small {
+  display: block;
+  color: var(--muted);
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.completed strong {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.category-card {
+  min-height: 105px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px #302c2408;
+}
+
+.category-card span {
+  font-size: 27px;
+}
+
+.category-card strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.habit-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.habit-card strong {
+  font-size: 13px;
+}
+
+.habit-card small {
+  display: block;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.habit-card button {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--soft);
+  padding: 9px 13px;
+}
+
+.add-button {
+  width: 100%;
+  margin-top: 25px;
+  background: var(--ink);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 17px;
+  font-size: 15px;
+  box-shadow: 0 4px 12px #25272920;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  justify-content: space-around;
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding: 12px 4px 17px;
+  z-index: 10;
+}
+
+.bottom-nav button {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 21px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.bottom-nav button small {
+  font-size: 10px;
+}
+
+.bottom-nav button.active {
+  color: var(--ink);
+  font-weight: bold;
+}
+
+@media (max-width: 360px) {
+  .progress-card {
+    gap: 12px;
+    padding: 13px;
+  }
+
+  .progress-circle {
+    width: 95px;
+    height: 95px;
+  }
+
+  .category-grid {
+    gap: 7px;
+  }
+}
