@@ -1,0 +1,12 @@
+{
+  "name": "My Everyday",
+  "short_name": "My Everyday",
+  "description": "A little more organized. A lot more freedom.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f2e9",
+  "theme_color": "#f7f2e9",
+  "lang": "en"
+}
