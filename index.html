@@ -1,150 +1,182 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7f1e6">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f2e9">
   <meta name="description" content="My Everyday - A little more organized. A lot more freedom.">
   <title>My Everyday</title>
-
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="app">
-
+  <div class="app-shell">
     <header class="topbar">
-      <div>
-        <div class="brand">My Everyday</div>
-        <div class="tagline">A little more organized.</div>
-      </div>
-      <button class="icon-button" id="languageBtn">EN</button>
+      <a class="brand-lockup" href="#" data-action="go-home" aria-label="My Everyday home">
+        <span class="brand-mark">✎</span>
+        <span><strong>My Everyday</strong><small data-i18n="tagline">A little more organized.</small></span>
+      </a>
+      <button class="language-button" id="languageBtn" type="button">EN / ES</button>
     </header>
 
-    <main>
-
-      <section class="welcome">
-        <div>
-          <p class="date" id="todayDate"></p>
-          <h1>Make today count.</h1>
-          <p class="subtitle">One step at a time.</p>
-        </div>
-        <div class="sun-icon">☀</div>
-      </section>
-
-      <section class="progress-card">
-        <div class="progress-circle" id="progressCircle">
+    <main id="appMain">
+      <section class="page active" id="page-home">
+        <div class="welcome">
           <div>
-            <strong id="taskProgress">0/0</strong>
-            <span>Tasks done</span>
+            <p class="eyebrow" id="todayDate"></p>
+            <h1 data-i18n="makeToday">Make today count.</h1>
+            <p class="subtitle" data-i18n="oneStep">One step at a time.</p>
           </div>
+          <div class="sun-mark" aria-hidden="true">☼</div>
         </div>
 
-        <div class="progress-info">
-          <h3>Your daily progress</h3>
-          <p id="progressMessage">Let's get started!</p>
-          <span id="habitProgress">Habits: 0 completed</span>
-        </div>
+        <section class="progress-card">
+          <div class="progress-ring" id="progressRing">
+            <div><strong id="taskProgress">0/0</strong><span data-i18n="tasksDone">Tasks done</span></div>
+          </div>
+          <div class="progress-copy">
+            <h2 data-i18n="dailyProgress">Your daily progress</h2>
+            <p id="progressMessage"></p>
+            <small id="habitProgress"></small>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div><p class="eyebrow" data-i18n="focusToday">YOUR FOCUS</p><h2 data-i18n="todaysTasks">Today's tasks</h2></div>
+            <button class="text-button" data-action="show-all-tasks" data-i18n="viewAll">View all →</button>
+          </div>
+          <div id="homeTaskList" class="task-list"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div><p class="eyebrow" data-i18n="organizeLife">MAKE SPACE FOR WHAT MATTERS</p><h2 data-i18n="everydayLife">Your everyday life</h2></div>
+          </div>
+          <div id="homeCategories" class="category-grid"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div><p class="eyebrow" data-i18n="littleByLittle">LITTLE BY LITTLE</p><h2 data-i18n="dailyHabits">Daily habits</h2></div>
+            <button class="text-button" data-action="go-organize" data-i18n="editGoals">Edit goals</button>
+          </div>
+          <div id="homeHabits" class="habit-list"></div>
+        </section>
+        <button class="primary-button full-width" data-action="add-task">＋ <span data-i18n="addTask">Add a task</span></button>
       </section>
 
-      <section class="section">
-        <div class="section-heading">
-          <h2>Today's tasks</h2>
-          <button id="viewAllBtn">View all →</button>
+      <section class="page" id="page-tasks">
+        <div class="page-heading">
+          <p class="eyebrow" data-i18n="getThingsDone">GET THINGS DONE</p>
+          <h1 data-i18n="yourTasks">Your tasks</h1>
+          <p class="subtitle" data-i18n="oneThingAtTime">One thing at a time.</p>
         </div>
-        <div id="taskList" class="task-list"></div>
+        <div class="filter-row" id="taskFilters"></div>
+        <div class="section-heading compact"><h2 id="taskSectionTitle" data-i18n="allTasks">All tasks</h2><span class="count-pill" id="taskCount">0</span></div>
+        <div id="allTaskList" class="task-list"></div>
+        <button class="primary-button full-width" data-action="add-task">＋ <span data-i18n="addTask">Add a task</span></button>
       </section>
 
-      <section class="section">
-        <div class="section-heading">
-          <h2>Your everyday life</h2>
+      <section class="page" id="page-calendar">
+        <div class="page-heading">
+          <p class="eyebrow" data-i18n="seeAhead">SEE WHAT'S AHEAD</p>
+          <h1 data-i18n="calendar">Calendar</h1>
+          <p class="subtitle" data-i18n="yourUpcoming">Your upcoming tasks, at a glance.</p>
         </div>
-
-        <div class="category-grid">
-
-          <button class="category-card" data-category="Personal">
-            <span>☑</span>
-            <strong>Personal</strong>
-          </button>
-
-          <button class="category-card" data-category="Cars">
-            <span>🚗</span>
-            <strong>Cars</strong>
-          </button>
-
-          <button class="category-card" data-category="Home">
-            <span>⌂</span>
-            <strong>Home</strong>
-          </button>
-
-          <button class="category-card" data-category="Kitchen">
-            <span>♨</span>
-            <strong>Kitchen</strong>
-          </button>
-
-          <button class="category-card" data-category="Projects">
-            <span>✎</span>
-            <strong>Projects</strong>
-          </button>
-
-          <button class="category-card" data-category="Garden">
-            <span>❀</span>
-            <strong>Garden</strong>
-          </button>
-
-          <button class="category-card" data-category="Other">
-            <span>＋</span>
-            <strong>Other</strong>
-          </button>
-
+        <div class="calendar-date-card">
+          <label for="calendarDate" data-i18n="chooseDate">Choose a date</label>
+          <input type="date" id="calendarDate">
         </div>
+        <div class="section-heading compact"><h2 id="calendarTitle"></h2></div>
+        <div id="calendarTaskList" class="task-list"></div>
       </section>
 
-      <section class="section">
-        <div class="section-heading">
-          <h2>Daily habits</h2>
-          <span class="small-note">Small steps matter</span>
+      <section class="page" id="page-organize">
+        <div class="page-heading">
+          <p class="eyebrow" data-i18n="makeItYours">MAKE IT YOURS</p>
+          <h1 data-i18n="organize">Organize</h1>
+          <p class="subtitle" data-i18n="buildYourRoutine">Build routines that work for you.</p>
         </div>
-
-        <div id="habitList"></div>
+        <section class="section">
+          <div class="section-heading"><h2 data-i18n="dailyGoals">Daily goals</h2><button class="text-button" data-action="add-habit" data-i18n="addHabit">＋ Add habit</button></div>
+          <div id="manageHabits" class="habit-list"></div>
+        </section>
+        <section class="section">
+          <div class="section-heading"><h2 data-i18n="yourProjects">Your projects</h2><button class="text-button" data-action="add-project" data-i18n="newProject">＋ New project</button></div>
+          <div id="projectList" class="project-list"></div>
+        </section>
+        <section class="section">
+          <div class="section-heading"><h2 data-i18n="categories">Categories</h2></div>
+          <div id="organizeCategories" class="category-grid"></div>
+        </section>
       </section>
 
-      <button class="add-button" id="addTaskBtn">
-        + Add a task
-      </button>
-
+      <section class="page" id="page-more">
+        <div class="page-heading">
+          <p class="eyebrow" data-i18n="yourSpace">YOUR SPACE</p>
+          <h1 data-i18n="more">More</h1>
+          <p class="subtitle" data-i18n="simpleAndPersonal">Simple, personal, and yours.</p>
+        </div>
+        <div class="settings-card">
+          <div><strong data-i18n="language">Language</strong><small data-i18n="chooseLanguage">Choose your app language.</small></div>
+          <button class="secondary-button" data-action="toggle-language" id="languageSetting">English</button>
+        </div>
+        <div class="settings-card">
+          <div><strong data-i18n="dataOnDevice">Your data</strong><small data-i18n="dataOnDeviceDesc">Your tasks and habits are saved on this device.</small></div>
+          <span class="device-label">● <span data-i18n="savedLocally">Saved locally</span></span>
+        </div>
+        <p class="footer-note">My Everyday · <span data-i18n="slogan">A little more organized. A lot more freedom.</span></p>
+      </section>
     </main>
 
-    <nav class="bottom-nav">
-      <button class="active" data-page="Home">
-        ⌂<small>Home</small>
-      </button>
-
-      <button data-page="Tasks">
-        ☑<small>Tasks</small>
-      </button>
-
-      <button data-page="Calendar">
-        ▦<small>Calendar</small>
-      </button>
-
-      <button data-page="Organize">
-        ▤<small>Organize</small>
-      </button>
-
-      <button data-page="More">
-        •••<small>More</small>
-      </button>
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-button active" data-page="home"><span>⌂</span><small data-i18n="home">Home</small></button>
+      <button class="nav-button" data-page="tasks"><span>☑</span><small data-i18n="tasks">Tasks</small></button>
+      <button class="nav-button" data-page="calendar"><span>▦</span><small data-i18n="calendar">Calendar</small></button>
+      <button class="nav-button" data-page="organize"><span>▤</span><small data-i18n="organize">Organize</small></button>
+      <button class="nav-button" data-page="more"><span>•••</span><small data-i18n="more">More</small></button>
     </nav>
-
   </div>
 
-  <script src="app.js"></script>
+  <dialog id="taskDialog" class="app-dialog">
+    <form id="taskForm" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow" id="taskDialogEyebrow">TASK</p><h2 id="taskDialogTitle">Add a task</h2></div><button type="button" class="close-button" data-action="close-dialog">×</button></div>
+      <input type="hidden" id="taskId">
+      <label for="taskName" data-i18n="taskName">What needs to be done?</label>
+      <input id="taskName" type="text" maxlength="120" required placeholder="e.g. Check car oil">
+      <label for="taskCategory" data-i18n="category">Category</label>
+      <select id="taskCategory"></select>
+      <label for="taskDate" data-i18n="dueDate">Due date</label>
+      <input id="taskDate" type="date">
+      <label for="taskProject" data-i18n="projectOptional">Project (optional)</label>
+      <select id="taskProject"><option value="">—</option></select>
+      <div class="dialog-actions"><button type="button" class="secondary-button" data-action="close-dialog" data-i18n="cancel">Cancel</button><button type="submit" class="primary-button" data-i18n="saveTask">Save task</button></div>
+    </form>
+  </dialog>
 
+  <dialog id="habitDialog" class="app-dialog">
+    <form id="habitForm" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow" data-i18n="dailyRoutine">DAILY ROUTINE</p><h2 data-i18n="habitGoal">Habit goal</h2></div><button type="button" class="close-button" data-action="close-dialog">×</button></div>
+      <input type="hidden" id="habitIndex">
+      <label for="habitName" data-i18n="habitName">Habit name</label><input id="habitName" required maxlength="60">
+      <div class="two-fields"><div><label for="habitGoalValue" data-i18n="dailyTarget">Daily target</label><input id="habitGoalValue" type="number" min="1" max="999" required></div><div><label for="habitUnit" data-i18n="unit">Unit</label><input id="habitUnit" maxlength="20" placeholder="minutes"></div></div>
+      <div class="dialog-actions"><button type="button" class="secondary-button" data-action="close-dialog" data-i18n="cancel">Cancel</button><button type="submit" class="primary-button" data-i18n="save">Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="projectDialog" class="app-dialog">
+    <form id="projectForm" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow" data-i18n="planSomething">PLAN SOMETHING</p><h2 data-i18n="newProject">New project</h2></div><button type="button" class="close-button" data-action="close-dialog">×</button></div>
+      <label for="projectName" data-i18n="projectName">Project name</label><input id="projectName" required maxlength="80" placeholder="e.g. House renovation">
+      <div class="dialog-actions"><button type="button" class="secondary-button" data-action="close-dialog" data-i18n="cancel">Cancel</button><button type="submit" class="primary-button" data-i18n="createProject">Create project</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
@@ -154,6 +186,5 @@
       });
     }
   </script>
-
 </body>
 </html>
