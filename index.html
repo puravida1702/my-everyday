@@ -7,11 +7,13 @@
   <meta name="theme-color" content="#f7f1e6">
   <meta name="description" content="My Everyday - A little more organized. A lot more freedom.">
   <title>My Everyday</title>
+
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <div class="app">
 
@@ -24,6 +26,7 @@
     </header>
 
     <main>
+
       <section class="welcome">
         <div>
           <p class="date" id="todayDate"></p>
@@ -40,6 +43,7 @@
             <span>Tasks done</span>
           </div>
         </div>
+
         <div class="progress-info">
           <h3>Your daily progress</h3>
           <p id="progressMessage">Let's get started!</p>
@@ -59,25 +63,44 @@
         <div class="section-heading">
           <h2>Your everyday life</h2>
         </div>
+
         <div class="category-grid">
+
           <button class="category-card" data-category="Personal">
-            <span>☑</span><strong>Personal</strong>
+            <span>☑</span>
+            <strong>Personal</strong>
           </button>
+
           <button class="category-card" data-category="Cars">
-            <span>🚗</span><strong>Cars</strong>
+            <span>🚗</span>
+            <strong>Cars</strong>
           </button>
+
           <button class="category-card" data-category="Home">
-            <span>⌂</span><strong>Home</strong>
+            <span>⌂</span>
+            <strong>Home</strong>
           </button>
+
+          <button class="category-card" data-category="Kitchen">
+            <span>♨</span>
+            <strong>Kitchen</strong>
+          </button>
+
           <button class="category-card" data-category="Projects">
-            <span>✎</span><strong>Projects</strong>
+            <span>✎</span>
+            <strong>Projects</strong>
           </button>
+
           <button class="category-card" data-category="Garden">
-            <span>❀</span><strong>Garden</strong>
+            <span>❀</span>
+            <strong>Garden</strong>
           </button>
-          <button class="category-card" data-category="Calendar">
-            <span>▦</span><strong>Calendar</strong>
+
+          <button class="category-card" data-category="Other">
+            <span>＋</span>
+            <strong>Other</strong>
           </button>
+
         </div>
       </section>
 
@@ -86,32 +109,51 @@
           <h2>Daily habits</h2>
           <span class="small-note">Small steps matter</span>
         </div>
+
         <div id="habitList"></div>
       </section>
 
       <button class="add-button" id="addTaskBtn">
         + Add a task
       </button>
+
     </main>
 
     <nav class="bottom-nav">
-      <button class="active" data-page="Home">⌂<small>Home</small></button>
-      <button data-page="Tasks">☑<small>Tasks</small></button>
-      <button data-page="Calendar">▦<small>Calendar</small></button>
-      <button data-page="Organize">▤<small>Organize</small></button>
-      <button data-page="More">•••<small>More</small></button>
+      <button class="active" data-page="Home">
+        ⌂<small>Home</small>
+      </button>
+
+      <button data-page="Tasks">
+        ☑<small>Tasks</small>
+      </button>
+
+      <button data-page="Calendar">
+        ▦<small>Calendar</small>
+      </button>
+
+      <button data-page="Organize">
+        ▤<small>Organize</small>
+      </button>
+
+      <button data-page="More">
+        •••<small>More</small>
+      </button>
     </nav>
 
   </div>
+
   <script src="app.js"></script>
+
   <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js")
-      .then(() => console.log("Offline mode ready"))
-      .catch(error => console.error("Offline error:", error));
-  });
-}
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .then(() => console.log("Offline mode ready"))
+          .catch(error => console.error("Offline error:", error));
+      });
+    }
   </script>
+
 </body>
 </html>
