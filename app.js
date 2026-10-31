@@ -94,6 +94,7 @@
   let language = localStorage.getItem("myEverydayLanguage") || "en";
   let currentPage = "home";
   let currentFilter = "All";
+  let currentProject = null;
   let toastTimer;
 
   const t = key => (translations[language] && translations[language][key]) || translations.en[key] || key;
@@ -160,11 +161,12 @@
   function emptyState() { return `<div class="empty-state">${t("noTasks")}</div>`; }
 
   function renderHome() {
-    const todays = tasks.filter(x => !x.date || x.date === "No date" || x.date === todayISO()).slice(0,4);
+    const todaysAll = tasks.filter(x => !x.date || x.date === "No date" || x.date === todayISO());
+    const todays = todaysAll.slice(0,4);
     $("homeTaskList").innerHTML = todays.length ? todays.map(taskCard).join("") : emptyState();
     renderCategories();
     $("homeHabits").innerHTML = habits.items.slice(0,4).map((h,i)=>habitCard(h,i,false)).join("") || `<div class="empty-state">${t("noHabits")}</div>`;
-    const total=tasks.length, done=tasks.filter(x=>x.done).length, pct=total?Math.round(done/total*100):0;
+    const total=todaysAll.length, done=todaysAll.filter(x=>x.done).length, pct=total?Math.round(done/total*100):0;
     $("taskProgress").textContent=`${done}/${total}`;
     $("progressRing").style.background=`conic-gradient(#aeb6ad ${pct}%,#eee9df ${pct}%)`;
     $("progressMessage").textContent = total && done===total ? (language==="es"?"¡Todo terminado!":"Wonderful! Everything is complete.") : (language==="es"?"Un paso a la vez. ¡Tú puedes!":"One step at a time. You've got this!");
@@ -178,8 +180,8 @@
   }
   function renderTasksPage() {
     renderFilters();
-    const filtered = tasks.filter(task=>currentFilter==="All" || taskCategory(task)===currentFilter);
-    $("taskSectionTitle").textContent=currentFilter==="All"?t("allTasks"):categoryLabel(currentFilter);
+    const filtered = tasks.filter(task=>(currentFilter==="All" || taskCategory(task)===currentFilter) && (!currentProject || task.project===currentProject));
+    $("taskSectionTitle").textContent=currentProject || (currentFilter==="All"?t("allTasks"):categoryLabel(currentFilter));
     $("taskCount").textContent=String(filtered.length);
     $("allTaskList").innerHTML=filtered.length?filtered.slice().sort((a,b)=>(a.done-b.done)||String(a.date||"9999").localeCompare(String(b.date||"9999"))).map(taskCard).join(""):emptyState();
   }
@@ -245,12 +247,12 @@
     const action=button.dataset.action;
     if(action==="go-home") {event.preventDefault();navigate("home");}
     if(action==="go-organize") navigate("organize");
-    if(action==="show-all-tasks") {currentFilter="All";navigate("tasks");}
+    if(action==="show-all-tasks") {currentFilter="All";currentProject=null;navigate("tasks");}
     if(action==="add-task") openTaskDialog();
     if(action==="close-dialog") button.closest("dialog")?.close();
     if(action==="toggle-language") {language=language==="en"?"es":"en";localStorage.setItem("myEverydayLanguage",language);applyTranslations();}
-    if(action==="filter-category") {currentFilter=button.dataset.category;navigate("tasks");}
-    if(action==="set-filter") {currentFilter=button.dataset.filter;renderTasksPage();}
+    if(action==="filter-category") {currentFilter=button.dataset.category;currentProject=null;navigate("tasks");}
+    if(action==="set-filter") {currentFilter=button.dataset.filter;currentProject=null;renderTasksPage();}
     if(action==="edit-task") {const task=tasks.find(x=>x.id===button.dataset.id);if(task)openTaskDialog(task);}
     if(action==="delete-task") {
       if(confirm(t("deleteConfirm"))){tasks=tasks.filter(x=>x.id!==button.dataset.id);saveTasks();renderAll();showToast(t("taskDeleted"));}
@@ -270,7 +272,7 @@
     if(action==="delete-project") {
       if(confirm(t("deleteConfirm"))){projects=projects.filter(p=>p.id!==button.dataset.id);saveProjects();renderAll();showToast(t("projectDeleted"));}
     }
-    if(action==="project-tasks") {currentFilter="All";navigate("tasks");}
+    if(action==="project-tasks") {currentFilter="All";currentProject=button.dataset.name;navigate("tasks");}
   });
 
   document.addEventListener("change", event => {

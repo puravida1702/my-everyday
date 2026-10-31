@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-everyday-v3";
+const CACHE_NAME = "my-everyday-v4";
 const APP_FILES = [
   "./",
   "./index.html",
