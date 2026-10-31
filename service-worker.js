@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-everyday-v4";
+const CACHE_NAME = "my-everyday-v5";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -41,6 +41,18 @@ self.addEventListener("fetch", event => {
         if (event.request.mode === "navigate") return caches.match("./index.html");
         return new Response("", {status:503});
       });
+    })
+  );
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  event.waitUntil(
+    self.clients.matchAll({type:"window", includeUncontrolled:true}).then(list => {
+      for (const client of list) {
+        if ("focus" in client) return client.focus();
+      }
+      return self.clients.openWindow("./");
     })
   );
 });
