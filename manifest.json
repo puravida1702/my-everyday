@@ -1,9 +1,10 @@
 {
   "name": "My Everyday",
+  "id": "/-my-everyday/",
   "short_name": "My Everyday",
   "description": "A little more organized. A lot more freedom.",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/-my-everyday/",
+  "scope": "/-my-everyday/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f7f2e9",
