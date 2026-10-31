@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-everyday-v5";
+const CACHE_NAME = "my-everyday-v6";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -10,7 +10,7 @@ const APP_FILES = [
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES)));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES.map(f => new Request(f, {cache: "reload"})))));
   self.skipWaiting();
 });
 
